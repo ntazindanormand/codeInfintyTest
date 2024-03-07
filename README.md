@@ -3,7 +3,7 @@
 This repository contains various projects developed by CodeInfinity. Each project has its own ReadMe file for detailed information. Please refer to the respective ReadMe files for each project:
 
 1. **Test1 Project**
-    - [ReadMe for Test1 Project](path/to/test1/readme)
+    - [ReadMe for Test1 Project](TEST1/READ ME .md)
 
 2. **Test2 Project**
     - [ReadMe for Test2 Project](path/to/test2/readme)
