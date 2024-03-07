@@ -1,0 +1,84 @@
+/* style.css */
+/* Your existing styles here */
+
+.success-message, .error-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.success-message {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.error-message {
+    background-color: #f44336;
+    color: #fff;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-width: 300px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button.cancel {
+    background-color: #f44336;
+    margin-left: 10px;
+}
+
+button:hover, button.cancel:hover {
+    opacity: 0.8;
+}
+
+#matchMessage {
+    margin-bottom: 16px;
+    font-size: 16px;
+    color: green;
+}
+
+#tickIcon {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 18px;
+}

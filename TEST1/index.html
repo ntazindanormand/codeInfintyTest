@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="process.php" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" required>
+
+        <label for="idNumber">ID Number:</label>
+        <input type="text" id="idNumber" name="idNumber" pattern="\d{13}" title="ID Number must be 13 digits long" required>
+
+        <label for="dob">Date of Birth (dd/mm/YYYY):</label>
+        <input type="text" id="dob" name="dob" pattern="\d{2}/\d{2}/\d{4}" title="Enter date in dd/mm/YYYY format" oninput="checkMatch()" required>
+
+        <div id="matchMessage"></div>
+
+        <button type="submit">POST</button>
+        <button type="button" class="cancel" onclick="clearForm()">CANCEL</button>
+		
+		 <!-- Java script for Form Validation-->
+        <script>
+            function clearForm() {
+                document.getElementById("name").value = "";
+                document.getElementById("surname").value = "";
+                document.getElementById("idNumber").value = "";
+                document.getElementById("dob").value = "";
+                document.getElementById("matchMessage").innerHTML = ""; // Clear match message
+            }
+
+            function checkMatch() {
+                var idNumber = document.getElementById("idNumber").value;
+                var dob = document.getElementById("dob").value;
+
+                var idYear = idNumber.substring(0, 2);
+                var idMonth = idNumber.substring(2, 4);
+                var idDay = idNumber.substring(4, 6);
+
+                var dobYear = dob.substring(8, 10);
+                var dobMonth = dob.substring(3, 5);
+                var dobDay = dob.substring(0, 2);
+
+                if (idYear === dobYear && idMonth === dobMonth && idDay === dobDay) {
+                    document.getElementById("matchMessage").innerHTML = `<span id="tickIcon">✓</span> Match! ID Number matches Date of Birth.`;
+                    document.getElementById("matchMessage").style.color = "green";
+                } else {
+                    document.getElementById("matchMessage").innerHTML = ""; // Clear the tick icon
+                    document.getElementById("matchMessage").innerText = "No Match. Please check the ID Number and Date of Birth.";
+                    document.getElementById("matchMessage").style.color = "red";
+                }
+            }
+function showSuccessMessage(message) {
+            var successMessage = document.createElement("div");
+            successMessage.className = "success-message";
+            successMessage.textContent = message;
+
+            document.body.appendChild(successMessage);
+
+            setTimeout(function () {
+                document.body.removeChild(successMessage);
+            }, 5000);
+            }
+
+            function postData() {
+                var name = document.getElementById("name").value;
+                var surname = document.getElementById("surname").value;
+                var idNumber = document.getElementById("idNumber").value;
+                var dob = document.getElementById("dob").value;
+
+                fetch("/postData", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        surname: surname,
+                        idNumber: idNumber,
+                        dob: dob,
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.warning) {
+                        showErrorMessage(data.warning);
+                    }
+
+                    if (data.success) {
+                        showSuccessMessage(data.message);
+                        clearForm();
+                    } else {
+                        console.error("Duplicate ID Number. Please check your input and try again.");
+                        showErrorMessage("Duplicate ID Number. Please check your input and try again.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+            }
+        </script>
+    </form>
+</body>
+</html>
