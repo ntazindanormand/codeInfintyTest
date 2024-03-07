@@ -20,12 +20,14 @@ Configure PHP:
 Make sure PHP is installed on your server, and the required extensions are enabled. Refer to your server's documentation for PHP configuration.
 
 ## Setup SQLite Database:
+### Install Composer Dependencies
 
-Create an empty SQLite database file (e.g., db.sqlite3) in the project root.
-Ensure the web server has write permissions for the project directory.
-Update Database Configuration:
-Open import_csv.php and update the database connection settings if necessary.
-**composer install**
+1. Open a terminal in your project directory.
+2. Copy and paste the following command to install Composer dependencies:
+
+   ```bash
+   composer install
+
 ## Configure Web Server:
 Set up your web server to point to the project's public directory. Ensure that URL rewriting is enabled (for clean URLs).
 
@@ -39,6 +41,20 @@ Access the CSV Generator by visiting the /generate_csv.php URL.
 Enter the desired number of variations and click "Generate CSV."
 The generated CSV file will be saved in the output directory.
 ## CSV Importer:
+## Access SQLite Database
+
+To access the SQLite database and perform queries, you can use a SQLite client or command-line tool. Here are the steps:
+
+1. **SQLite Command Line:**
+
+   Open a terminal and navigate to your project directory.
+
+   sqlite3 db.sqlite3
+   
+   T0 check for the imported files**
+   ```bash
+   
+   SELECT * FROM csv_import;
 
 Access the CSV Importer by visiting the /import_csv.php URL.
 Choose the CSV file to import using the file input.
